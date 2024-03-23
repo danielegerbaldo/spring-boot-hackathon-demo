@@ -2,7 +2,6 @@ pipeline {
     agent any
 
     stages {
-        withMaven(globalMavenSettingsConfig: '', jdk: '', maven: 'maven', mavenSettingsConfig: '', traceability: true) {
         stage('Checkout') {
             steps {
                 // Checkout code from Git repository
@@ -11,8 +10,10 @@ pipeline {
         }
     stage('Build') {
             steps {
+                withMaven(globalMavenSettingsConfig: '', jdk: '', maven: 'maven', mavenSettingsConfig: '', traceability: true) {
                 // Maven build step
                 sh 'mvn clean package'
+                }
             }
      }
     stage('SonarQube Code Analysis') {
@@ -45,6 +46,5 @@ pipeline {
                     }
                 }
             }
-        }
         }
 }
