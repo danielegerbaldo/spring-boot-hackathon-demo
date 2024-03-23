@@ -2,6 +2,7 @@ pipeline {
     agent any
 
     stages {
+        withMaven(globalMavenSettingsConfig: '', jdk: '', maven: 'maven', mavenSettingsConfig: '', traceability: true) {
         stage('Checkout') {
             steps {
                 // Checkout code from Git repository
@@ -44,5 +45,6 @@ pipeline {
                     }
                 }
             }
+        }
         }
 }
