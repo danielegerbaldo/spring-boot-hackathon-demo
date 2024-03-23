@@ -10,9 +10,9 @@ pipeline {
         }
     stage('Build') {
             steps {
-                withMaven(globalMavenSettingsConfig: '', jdk: '', maven: 'maven', mavenSettingsConfig: '', traceability: true) {
-                // Maven build step
-                sh 'mvn clean package'
+                withGradle {
+                // Gradle build step
+                sh './gradlew publishToMavenLocal'
                 }
             }
      }
